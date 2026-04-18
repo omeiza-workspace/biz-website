@@ -1,0 +1,52 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: pages
+    label: Pages
+    files:
+      - file: src/content/config.json
+        label: Site Config
+        fields:
+          - name: title
+            label: Site Title
+            widget: string
+          - name: description
+            label: Description
+            widget: text
+
+  - name: blog
+    label: Blog Posts
+    folder: src/content/blog
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text }
+      - { name: date, label: Date, widget: datetime }
+      - { name: featured, label: Featured post, widget: boolean, default: false }
+      - { name: image, label: Cover Image, widget: image, required: false }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: features
+    label: Features
+    folder: src/content/features
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: icon, label: Icon (Lucide name)', widget: string }
+      - { name: description, label: Description, widget: text }
+
+  - name: faq
+    label: FAQ
+    folder: src/content/faq
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { name: question, label: Question, widget: string }
+      - { name: answer, label: Answer, widget: markdown }
